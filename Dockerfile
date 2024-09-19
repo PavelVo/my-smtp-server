@@ -1,11 +1,8 @@
-# Используем базовый образ Ubuntu
-FROM ubuntu:latest
-
-# Проверка версии операционной системы
-RUN cat /etc/os-release
+# Используем более легковесный образ
+FROM alpine:latest
 
 # Устанавливаем необходимые пакеты
-RUN apt-get update && apt-get install -y postfix mailutils
+RUN apk add --no-cache postfix
 
 # Настройка необходимых переменных окружения
 ENV MAIL_NAME=yourdomain.com
@@ -19,11 +16,8 @@ RUN postconf -e "myhostname = $MAIL_NAME" \
     && postconf -e "inet_interfaces = all" \
     && postconf -e "inet_protocols = all"
 
-# Создание пользователя для SMTP
-RUN useradd -r -m -d /var/spool/postfix -s /sbin/nologin -g postfix user
-
 # Открываем порт 25 для SMTP
 EXPOSE 25
 
 # Установка и запуск Postfix
-CMD service postfix start && tail -f /var/log/mail.log
+CMD ["postfix", "start-fg"]
