@@ -20,7 +20,7 @@ RUN postconf -e "myhostname = $MAIL_NAME" \
 RUN useradd -r -m -d /var/spool/postfix -s /sbin/nologin -g postfix user
 
 # Открываем порт 25 для SMTP
-EXPOSE 25
+EXPOSE 20
 
 # Установка и запуск Postfix
 CMD service postfix start && tail -f /var/log/mail.log
