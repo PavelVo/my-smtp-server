@@ -4,7 +4,7 @@ FROM ubuntu:latest
 # Устанавливаем необходимые пакеты
 RUN apt-get update && apt-get install -y postfix mailutils
 
-# Настройка необходимых переменных окружения
+# Настройка необходимых переменных окружени.
 ENV MAIL_NAME=zabolotie.ru
 ENV SMTP_USER=pavel:windows
 
