@@ -17,7 +17,7 @@ RUN postconf -e "myhostname = $MAIL_NAME" \
     && postconf -e "inet_protocols = all"
 
 # Открываем порт 25 для SMTP
-EXPOSE 25
+EXPOSE 587
 
 # Установка и запуск Postfix
 CMD ["postfix", "start-fg"]
